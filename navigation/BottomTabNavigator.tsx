@@ -10,6 +10,7 @@ import AddScreenQRCode from '../screens/AddScreenQRCode';
 import OpenQrCode from '../screens/OpenQrCode';
 import HomeScreen from '../screens/QRCode/HomeScreen';
 import InputScreen from '../screens/QRCode/InputScreen';
+import StyleScreen from '../screens/QRCode/StyleScreen';
 
 import SettingsScreen from '../screens/Settings/SettingsScreen';
 import FAQScreen from '../screens/Settings/FAQScreen';
@@ -24,7 +25,8 @@ export default function BottomTabNavigator(props) {
   return (
     <BottomTab.Navigator
       initialRouteName="QrCodes"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
       <BottomTab.Screen
         component={QrCodesNavigator}
         name="QRCode"
@@ -65,6 +67,11 @@ function QrCodesNavigator() {
         name="InputScreen"
         options={{ headerTitle: 'Add Your Info' }}
         component={InputScreen}
+      />
+      <QrCodesStack.Screen
+        name="StyleScreen"
+        options={{ headerTitle: 'Style Your QR' }}
+        component={StyleScreen}
       />
       <QrCodesStack.Screen
         name="AddScreenQRCode"

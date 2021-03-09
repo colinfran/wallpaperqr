@@ -1,16 +1,16 @@
-import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Font from 'expo-font';
-import { StatusBar } from 'expo-status-bar';
-import { Root } from 'native-base';
-import React, { useState, useLayoutEffect } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Font from 'expo-font'
+import { StatusBar } from 'expo-status-bar'
+import { Root } from 'native-base'
+import React, { useState, useLayoutEffect } from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as ScreenOrientation from 'expo-screen-orientation'
 
-import JsonContext from './context';
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import JsonContext from './context'
+import useCachedResources from './hooks/useCachedResources'
+import useColorScheme from './hooks/useColorScheme'
+import Navigation from './navigation'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -30,8 +30,8 @@ export default function App() {
   };
 
   const lockOrientation = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
-  }
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+  };
 
   useLayoutEffect(() => {
     const loadFonts = async () => {
@@ -43,45 +43,45 @@ export default function App() {
     };
 
     const retrieveData = async () => {
-      let value = await AsyncStorage.getItem('json');
+      // let value = await AsyncStorage.getItem('json');
       if (value === null) {
         value = {
-          style:{},
-          info:{
-            firstName:'',
-            lastName: "",
+          info: {
+            firstName: '',
+            lastName: '',
             cellPhone: '',
-            email:"",
-            job:"",
-            company:"",
-            website:""
+            email: '',
+            job: '',
+            company: '',
+            website: '',
           },
-          qrcode: ""
+          qrcode: '',
         };
         await AsyncStorage.setItem('json', JSON.stringify(value));
       }
       setJson(JSON.parse(value));
     };
-    lockOrientation()
+    lockOrientation();
 
     loadFonts();
     retrieveData();
   }, []);
 
   return (
-    <SafeAreaProvider style={{backgroundColor:'#000'}}>
-      <Root style={{backgroundColor:'#000'}}>
-        <JsonContext.Provider
-          value={{
-            json,
-            updateJson,
-            selectedCellIndex,
-            setSelectedCellIndex: updateSelectedCellIndex,
-          }}>
-          <Navigation colorScheme={colorScheme} />
-        </JsonContext.Provider>
-      </Root>
+  <SafeAreaProvider style={{ backgroundColor: '#000' }}>
+      <Root style={{ backgroundColor: '#000' }}>
+      <JsonContext.Provider
+  value={{
+					  json,
+					  updateJson,
+					  selectedCellIndex,
+					  setSelectedCellIndex: updateSelectedCellIndex,
+					}}
+				>
+  <Navigation colorScheme={colorScheme} />
+				</JsonContext.Provider>
+			</Root>
       <StatusBar />
-    </SafeAreaProvider>
+		</SafeAreaProvider>
   );
 }

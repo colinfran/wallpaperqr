@@ -31,7 +31,8 @@ export default class AddScreenQRCode extends React.Component {
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={() => navigation.navigate('InputScreen')}>
+          onPress={() => navigation.navigate('InputScreen')}
+        >
           <Icon name="arrow-back" style={{ color: '#fff', paddingLeft: 10 }} />
           <Text>Back</Text>
         </TouchableOpacity>
@@ -39,7 +40,8 @@ export default class AddScreenQRCode extends React.Component {
       headerRight: () => (
         <TouchableOpacity
           onPress={this.onNextPress}
-          style={{ flexDirection: 'row', alignItems: 'center' }}>
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+        >
           <Text>Next</Text>
           <Icon name="arrow-forward" style={{ color: '#fff', paddingRight: 8 }} />
         </TouchableOpacity>
@@ -74,7 +76,8 @@ export default class AddScreenQRCode extends React.Component {
           <Text style={{ color: '#000', textAlign: 'center', marginTop: 10 }}>{color1}</Text>
         </View>
       );
-    } else if (selectedOption === 'color2') {
+    }
+    if (selectedOption === 'color2') {
       topText = 'Select background color';
       return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -90,7 +93,8 @@ export default class AddScreenQRCode extends React.Component {
           <Text style={{ color: '#000', textAlign: 'center', marginTop: 10 }}>{color2}</Text>
         </View>
       );
-    } else return null;
+    }
+    return null;
   };
 
   onNextPress = () => {
@@ -113,7 +117,7 @@ export default class AddScreenQRCode extends React.Component {
   render() {
     const json = this.context;
 
-    const width = Dimensions.get('window').width;
+    const { width } = Dimensions.get('window');
     const { color1, color2, isModalOpen } = this.state;
     return (
       <View style={[styles.container, { backgroundColor: color2 }]}>
@@ -132,13 +136,20 @@ export default class AddScreenQRCode extends React.Component {
 
         <View style={{ height: 200 }}>
           <View
-            style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: 30 }}>
+            style={{
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              marginTop: 30,
+            }}
+          >
             <View style={{ flex: 1, alignItems: 'flex-start' }}>
               <TouchableOpacity
                 style={[styles.colorPickContainer, { justifyContent: 'flex-start' }]}
                 onPress={() => {
                   this.setState({ selectedOption: 'color1', isModalOpen: !isModalOpen });
-                }}>
+                }}
+              >
                 <Badge
                   style={{
                     backgroundColor: color1,
@@ -154,7 +165,8 @@ export default class AddScreenQRCode extends React.Component {
                 style={[styles.colorPickContainer, { marginTop: 20 }]}
                 onPress={() => {
                   this.setState({ selectedOption: 'color2', isModalOpen: !isModalOpen });
-                }}>
+                }}
+              >
                 <Badge
                   style={{
                     backgroundColor: color2,
@@ -179,7 +191,8 @@ export default class AddScreenQRCode extends React.Component {
               marginRight: 45,
               marginBottom: 200,
             }}
-            onBackdropPress={() => this.setState({ isModalOpen: false })}>
+            onBackdropPress={() => this.setState({ isModalOpen: false })}
+          >
             <View style={{ backgroundColor: '#fff', flex: 1, justifyContent: 'center' }}>
               <View style={{ flex: 1, backgroundColor: '#fff', padding: 10 }}>
                 <View

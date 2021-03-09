@@ -11,6 +11,7 @@ export type BottomTabParamList = {
 export type QrCodesParamList = {
   HomeScreen: undefined;
   InputScreen: undefined;
+  StyleScreen: undefined;
   AddScreenQRCode: undefined;
   AddScreenPreview: undefined;
   OpenQrCode: undefined;

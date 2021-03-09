@@ -1,24 +1,22 @@
 module.exports = {
-  "parser": "babel-eslint",
-  "env": {
-    "es6": true
+  parser: 'babel-eslint',
+  env: {
+    es6: true,
   },
 
-  "extends": "airbnb",
+  extends: 'airbnb',
 
-  "plugins": [
-    "react"
-  ],
+  plugins: ['react'],
 
-  "rules": {
+  rules: {
     // resets
-    "no-underscore-dangle": 0,
-    "arrow-parens": 0,
-    "no-use-before-define": 0,
-    "import/extensions": 0,
-    "import/no-unresolved": 0,
-    "react/sort-comp": 0,
-    "react/jsx-filename-extension": 0,
-    "react/no-array-index-key": 0,
-  }
+    'no-underscore-dangle': 0,
+    'arrow-parens': 0,
+    'no-use-before-define': 0,
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
+    'react/sort-comp': 0,
+    'react/jsx-filename-extension': 0,
+    'react/no-array-index-key': 0,
+  },
 };

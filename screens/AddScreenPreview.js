@@ -10,6 +10,7 @@ import JsonContext from '../context';
 
 export default class AddScreenPreview extends React.Component {
   static contextType = JsonContext;
+
   componentDidMount() {
     const json = this.context;
     const { navigation } = this.props;
@@ -27,7 +28,8 @@ export default class AddScreenPreview extends React.Component {
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={() => navigation.navigate('AddScreenQRCode')}>
+          onPress={() => navigation.navigate('AddScreenQRCode')}
+        >
           <Icon name="arrow-back" style={{ color: contrast, paddingLeft: 10 }} />
           <Text style={{ color: contrast }}>Back</Text>
         </TouchableOpacity>
@@ -35,7 +37,8 @@ export default class AddScreenPreview extends React.Component {
       headerRight: () => (
         <TouchableOpacity
           onPress={this.onAddPress}
-          style={{ flexDirection: 'row', alignItems: 'center' }}>
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+        >
           <Text style={{ color: contrast }}>Save</Text>
           <Icon name="add" style={{ color: contrast, paddingRight: 8 }} />
         </TouchableOpacity>
@@ -74,7 +77,7 @@ export default class AddScreenPreview extends React.Component {
     const json = this.context;
     const color1 = json.json.list[json.json.list.length - 1].qrCodeImage.color;
     const color2 = json.json.list[json.json.list.length - 1].qrCodeImage.backgroundColor;
-    const width = Dimensions.get('window').width;
+    const { width } = Dimensions.get('window');
 
     const hexcolor = json.json.list[json.json.list.length - 1].qrCodeImage.backgroundColor;
     const contrast = fontColorContrast(hexcolor);
@@ -86,7 +89,8 @@ export default class AddScreenPreview extends React.Component {
           style={{ flex: 1 }}
           onCapture={(uri) => this.setState({ imageBase64: uri })}
           captureMode="mount"
-          options={{ result: 'data-uri' }}>
+          options={{ result: 'data-uri' }}
+        >
           <View
             style={[
               styles.qrcodecontainer,

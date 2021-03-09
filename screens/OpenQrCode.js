@@ -17,8 +17,10 @@ import {
 
 import { Text, View } from '../components/Themed';
 import JsonContext from '../context';
+
 export default class OpenQrCode extends React.Component {
   static contextType = JsonContext;
+
   componentDidMount() {
     const json = this.context;
     const { navigation } = this.props;
@@ -42,7 +44,8 @@ export default class OpenQrCode extends React.Component {
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={this.onBackPress}>
+          onPress={this.onBackPress}
+        >
           <Icon name="arrow-back" style={{ color: contrast, paddingLeft: 10 }} />
           <Text style={{ color: contrast }}>Back</Text>
         </TouchableOpacity>
@@ -50,7 +53,8 @@ export default class OpenQrCode extends React.Component {
       headerRight: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={this.onSavePress}>
+          onPress={this.onSavePress}
+        >
           <Text style={{ color: contrast, paddingRight: 12 }}>Save Image</Text>
         </TouchableOpacity>
       ),
@@ -71,7 +75,7 @@ export default class OpenQrCode extends React.Component {
           { text: 'Cancel', onPress: () => (returnVal = false) },
           { text: 'Settings', onPress: () => Linking.openURL('app-settings:') },
         ],
-        { cancelable: false }
+        { cancelable: false },
       );
       return false;
     }
@@ -81,10 +85,11 @@ export default class OpenQrCode extends React.Component {
   async saveFile() {
     const json = this.context;
     const base64Code = json.json.list[json.selectedCellIndex].qrCodeImage.url.split(
-      'data:image/png;base64,'
+      'data:image/png;base64,',
     )[1];
-    const filename =
-      FileSystem.documentDirectory + `${json.json.list[json.selectedCellIndex].objectId}.png`;
+    const filename = `${FileSystem.documentDirectory}${
+      json.json.list[json.selectedCellIndex].objectId
+    }.png`;
 
     await FileSystem.writeAsStringAsync(filename, base64Code, {
       encoding: FileSystem.EncodingType.Base64,
@@ -153,7 +158,7 @@ export default class OpenQrCode extends React.Component {
     const json = this.context;
     const color1 = json.json.list[json.selectedCellIndex].qrCodeImage.color;
     const color2 = json.json.list[json.selectedCellIndex].qrCodeImage.backgroundColor;
-    const width = Dimensions.get('window').width;
+    const { width } = Dimensions.get('window');
 
     const hexcolor = json.json.list[json.selectedCellIndex].qrCodeImage.backgroundColor;
     const imageQr = json.json.list[json.selectedCellIndex].qrCodeImage;

@@ -10,6 +10,7 @@ export default {
             screens: {
               HomeScreen: 'one',
               InputScreen: 'add',
+              StyleScreen: 'style',
               AddScreenQRCode: 'code',
               AddScreenPreview: 'preview',
               OpenQrCode: 'open',
@@ -18,9 +19,9 @@ export default {
           Settings: {
             screens: {
               SettingsScreen: 'two',
-              FAQScreen:'faq',
-              LicensesScreen:'licenses',
-              PrivacyPolicy:'privacy'
+              FAQScreen: 'faq',
+              LicensesScreen: 'licenses',
+              PrivacyPolicy: 'privacy',
             },
           },
         },
