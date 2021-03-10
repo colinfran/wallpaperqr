@@ -7,7 +7,6 @@ export default function FAQScreen() {
       source={{
         uri: 'https://colinfran.com',
       }}
-      style={{ marginTop: 20 }}
     />
   );
 }

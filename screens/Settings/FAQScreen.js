@@ -7,7 +7,6 @@ export default function FAQScreen() {
       source={{
         uri: 'https://github.com/facebook/react',
       }}
-      style={{ marginTop: 20 }}
     />
   );
 }

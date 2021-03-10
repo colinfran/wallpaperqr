@@ -100,15 +100,17 @@ export default class PreviewScreen extends React.Component {
 
     await MediaLibrary.saveToLibraryAsync(filename)
       .then(() => {
-        Alert.alert(
-          'Wallpaper created successfully',
-          `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
-          [
-            { text: 'Help', onPress: () => console.log('HelpedPressed') },
-            { text: 'OK', onPress: () => console.log('OK Pressed') }
-          ],
-          { cancelable: false }
-        );
+        setTimeout(function(){ 
+          Alert.alert(
+            'Wallpaper created successfully',
+            `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
+            [
+              { text: 'Help', onPress: () => console.log('HelpedPressed') },
+              { text: 'OK', onPress: () => console.log('OK Pressed') }
+            ],
+            { cancelable: false }
+          );
+         }, 300);
       })
       .catch((e) => {
         console.error('An error occured while trying to add the image file to the media library');
