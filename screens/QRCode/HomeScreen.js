@@ -2,7 +2,7 @@ import {
  Text, Icon, CardItem, Right, Thumbnail, Badge 
 } from 'native-base';
 import React, {
- useContext, useLayoutEffect, useRef,useState 
+ useContext, useLayoutEffect, useEffect, useRef,useState 
 } from 'react';
 import {
  StyleSheet, TouchableOpacity, Alert, Dimensions, Animated 
@@ -11,6 +11,8 @@ import QRCode from 'react-native-qrcode-svg';
 
 import { View } from '../../components/Themed';
 import JsonContext from '../../context';
+import { useHeaderHeight } from '@react-navigation/stack';
+import { useIsFocused } from '@react-navigation/native'
 
 function HomeScreen({ navigation }) {
   const json = useContext(JsonContext);
@@ -77,16 +79,27 @@ function HomeScreen({ navigation }) {
     ]).start(shakeButton2); // <-- reruns on completion
   };
 
+  const isFocused = useIsFocused()
+
+  useLayoutEffect(() => {
+      //Update the state you want to be updated
+  } , [isFocused])
+
   useLayoutEffect(() => {
     navigation.setOptions({
       gesturesEnabled: true,
-      headerShown: false,
+      headerTintColor:'transparent',
+      headerShown: true,
+      title: "",
+      headerStyle: {
+        backgroundColor: 'transparent'
+      },
     });
   }, [navigation]);
 
   const box1Animate = () => {
     isPressed1.current = true;
-    setBox1BorderStyle({ borderWidth: 0.5,
+    setBox1BorderStyle({ borderWidth: 2,
       borderColor: 'red' });
     Animated.timing(animatedValue1, {
       toValue: 1,
@@ -108,7 +121,7 @@ function HomeScreen({ navigation }) {
 
   const box2Animate = () => {
     isPressed2.current = true;
-    setBox2BorderStyle({ borderWidth: 0.5,
+    setBox2BorderStyle({ borderWidth: 2,
       borderColor: 'red' });
     Animated.timing(animatedValue2, {
       toValue: 1,
@@ -131,14 +144,17 @@ function HomeScreen({ navigation }) {
   const handleDownloadPress = () => {
     if (
       json.json.info.firstName === '' &&
-      json.json.info.firstName === '' &&
-      json.json.info.firstName === ''
+      json.json.info.lastName === '' &&
+      json.json.info.cellPhone === ''
     ) {
       box1Animate();
+      return;
     }
-    if (!json.json.info.style) {
+    if (!json.json?.style?.backgroundColor || json.json?.style?.imageUrl) {
       box2Animate();
+      return;
     }
+    navigation.navigate("PreviewScreen")
   };
 
   const formatPhoneNumber = (phoneNumberString) => {
@@ -154,18 +170,18 @@ function HomeScreen({ navigation }) {
   const onStylePress = () => {
     if (
       json.json.info.firstName === '' &&
-      json.json.info.firstName === '' &&
-      json.json.info.firstName === ''
+      json.json.info.lastName === '' &&
+      json.json.info.cellPhone === ''
     ) {
       box1Animate();
     } else {
       navigation.navigate('StyleScreen');
     }
   };
-  console.log(json.json)
+
   return (
     <View style={styles.flex}>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <View style={styles.list}>
           <View>
             <Text style={{ color: '#fff', fontSize: 32, fontWeight: 'bold' }}>Create Wallpaper</Text>
@@ -173,13 +189,14 @@ function HomeScreen({ navigation }) {
           <View>
             <Text>Add your info and styles</Text>
           </View>
-          <View>
+          <View style={{flex: 1, justifyContent:'space-evenly'}}>
             <View style={styles.screen}>
               <Animated.View
-                style={[box1BorderStyle, styles.boxParent, { transform: [{ rotate: rotate1 }] }]}>
+                style={[box1BorderStyle, styles.boxParent, { transform: [{ rotate: rotate1 }], height: (Dimensions.get('window').height * .25) }]}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('InputScreen')}
-                  style={[styles.box, { width: '100%', height: '100%' }]}>
+                  // onPress={() => navigation.navigate('InputScreen')}
+                  onPress={()=>navigation.navigate('InputScreen', { component: { name: 'InputScreen', options: { bottomTabs: { visible: false, drawBehind: true, animate: true } } }, })}
+                  style={[styles.box]}>
                   <View
                     style={{
                       backgroundColor: 'transparent',
@@ -238,12 +255,12 @@ function HomeScreen({ navigation }) {
                 </TouchableOpacity>
               </Animated.View>
             </View>
-            <View style={[styles.screen, { marginTop: 30 }]}>
+            <View style={[styles.screen]}>
               <Animated.View
-                style={[box2BorderStyle, styles.boxParent, { transform: [{ rotate: rotate2 }] }]}>
+                style={[box2BorderStyle, styles.boxParent, { transform: [{ rotate: rotate2 }],  height: (Dimensions.get('window').height * .25) }]}>
                 <TouchableOpacity
                   onPress={onStylePress}
-                  style={[styles.box, { width: '100%', height: '100%' }]}>
+                  style={[styles.box]}>
                   <View
                     style={{
                       backgroundColor: 'transparent',
@@ -297,13 +314,13 @@ function HomeScreen({ navigation }) {
                     }}>
                     <Icon
                       name={'checkmark-circle'}
-                      style={json.json?.style ? { color: '#4CD964' } : { color: '#1c1c1e' }}
+                      style={json.json?.style?.backgroundColor!== undefined ? { color: '#4CD964' } : { color: '#1c1c1e' }}
                     />
                   </View>
                 </TouchableOpacity>
               </Animated.View>
             </View>
-            <View style={[styles.screen, { marginTop: 30 }]}>
+            <View style={[styles.screen]}>
               <TouchableOpacity
                 disabled={isPressed1.current || isPressed2.current}
                 style={[styles.boxButton]}
@@ -318,7 +335,7 @@ function HomeScreen({ navigation }) {
                   <Icon
                     style={{ fontSize: 18 }}
                     type="AntDesign"
-                    name={json.json.ready ? 'smileo' : 'meh'}
+                    name={((json.json?.style?.backgroundColor) && json.json?.style?.qrCodeColor ) ? 'smileo' : 'meh'}
                   />
                   <Text style={([styles.text], {marginLeft: 10,  fontSize: 20 })}>Preview & Download</Text>
                 </View>
@@ -340,8 +357,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
-    marginTop: 100,
+    backgroundColor: 'transparent'
   },
   buttonBottom: {
     flex: 1,
@@ -393,8 +409,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: '95%',
-    height: 200,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#1c1c1e',
@@ -403,7 +418,6 @@ const styles = StyleSheet.create({
 
   boxParent: {
     width: '95%',
-    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

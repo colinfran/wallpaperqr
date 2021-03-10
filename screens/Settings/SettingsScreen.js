@@ -8,13 +8,18 @@ export default function SettingScreen({ navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerShown: false
+      headerTintColor:'transparent',
+      headerShown: true,
+      title: "",
+      headerStyle: {
+        backgroundColor: 'transparent'
+      },
     });
   }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <View style={[styles.screen, {marginTop: 100}]}>
+      <View style={[styles.screen]}>
         <View style={{width: '95%', height: 40,justifyContent: 'center',marginBottom: 30}}>
           <Text style={{color:'#fff', fontSize: 32, fontWeight:'bold'}}>Settings</Text>
         </View>

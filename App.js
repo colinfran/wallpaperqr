@@ -43,7 +43,9 @@ export default function App() {
     };
 
     const retrieveData = async () => {
-      // let value = await AsyncStorage.getItem('json');
+      let value = await AsyncStorage.getItem('json');
+      // console.log(value)
+
       if (value === null) {
         value = {
           info: {
@@ -66,6 +68,9 @@ export default function App() {
     loadFonts();
     retrieveData();
   }, []);
+
+  // console.log(json)
+
 
   return (
   <SafeAreaProvider style={{ backgroundColor: '#000' }}>

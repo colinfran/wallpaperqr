@@ -5,12 +5,13 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import AddScreenPreview from '../screens/AddScreenPreview';
-import AddScreenQRCode from '../screens/AddScreenQRCode';
+// import AddScreenPreview from '../screens/AddScreenPreview';
+// import AddScreenQRCode from '../screens/AddScreenQRCode';
 import OpenQrCode from '../screens/OpenQrCode';
 import HomeScreen from '../screens/QRCode/HomeScreen';
 import InputScreen from '../screens/QRCode/InputScreen';
 import StyleScreen from '../screens/QRCode/StyleScreen';
+import PreviewScreen from '../screens/QRCode/PreviewScreen';
 
 import SettingsScreen from '../screens/Settings/SettingsScreen';
 import FAQScreen from '../screens/Settings/FAQScreen';
@@ -73,16 +74,16 @@ function QrCodesNavigator() {
         options={{ headerTitle: 'Style Your QR' }}
         component={StyleScreen}
       />
-      <QrCodesStack.Screen
+      {/* <QrCodesStack.Screen
         name="AddScreenQRCode"
         options={{ headerTitle: 'Set Your Colors' }}
         component={AddScreenQRCode}
-      />
+      />*/}
       <QrCodesStack.Screen
-        name="AddScreenPreview"
+        name="PreviewScreen"
         options={{ headerTitle: 'Preview QR' }}
-        component={AddScreenPreview}
-      />
+        component={PreviewScreen}
+      /> 
       <QrCodesStack.Screen
         name="OpenQrCode"
         options={{ headerTitle: 'View QR' }}

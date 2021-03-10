@@ -12,7 +12,7 @@ export default {
               InputScreen: 'add',
               StyleScreen: 'style',
               AddScreenQRCode: 'code',
-              AddScreenPreview: 'preview',
+              PreviewScreen: 'preview',
               OpenQrCode: 'open',
             },
           },

@@ -101,7 +101,8 @@ export default class InputScreen extends React.Component {
       parent.setOptions({
         tabBarVisible: true,
       });
-      navigation.navigate('HomeScreen');
+      navigation.navigate('HomeScreen', { component: { name: 'InputScreen', options: { bottomTabs: { visible: false, animate: true } } }, })
+      // navigation.navigate('HomeScreen');
     };
     Alert.alert(
       // title
