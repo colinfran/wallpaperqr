@@ -32,10 +32,12 @@ export default class PreviewScreen extends React.Component {
         color: contrast,
       },
       headerTransparent: true,
+      gesturesEnabled: false,
+      swipeEnabled: false,
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={() => navigation.navigate('HomeScreen')}
+          onPress={this.onBackPress}
         >
           <Icon name="arrow-back" style={{ color: contrast, paddingLeft: 10 }} />
           <Text style={{ color: contrast }}>Back</Text>
@@ -53,6 +55,15 @@ export default class PreviewScreen extends React.Component {
     });
   }
 
+  onBackPress = () => {
+    const { navigation } = this.props;
+    const parent = navigation.dangerouslyGetParent();
+    parent.setOptions({
+      tabBarVisible: true,
+    });
+    navigation.navigate('HomeScreen')
+  }
+
 
   async getCameraRollPermissions() {
     let { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -65,7 +76,7 @@ export default class PreviewScreen extends React.Component {
         'No Notification Permission',
         'Go to setting and turn on permissions for photos',
         [
-          { text: 'Cancel', onPress: () => (returnVal = false) },
+          { text: 'Cancel', onPress: () => {} },
           { text: 'Settings', onPress: () => Linking.openURL('app-settings:') },
         ],
         { cancelable: false },
@@ -77,6 +88,7 @@ export default class PreviewScreen extends React.Component {
 
   async saveFile() {
     const json = this.context;
+    const { navigation } = this.props;
     const imageBase64 = this.state.imageBase64.split(
       'data:image/png;base64,',
     )[1];
@@ -105,7 +117,7 @@ export default class PreviewScreen extends React.Component {
             'Wallpaper created successfully',
             `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
             [
-              { text: 'Help', onPress: () => console.log('HelpedPressed') },
+              { text: 'Help', onPress: () => navigation.navigate("PermissionsScreen")  },
               { text: 'OK', onPress: () => console.log('OK Pressed') }
             ],
             { cancelable: false }

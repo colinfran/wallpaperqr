@@ -41,7 +41,7 @@ export default function SettingScreen({ navigation }) {
                 <Icon active name="arrow-forward" />
               </Right>
             </ListItem>
-            <ListItem underlayColor="#2B2B2E" touchableHighlightStyle={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} icon style={{borderBottomWidth: 0}} button={true}  >
+            <ListItem onPress={()=>navigation.navigate('GuideScreen')} underlayColor="#2B2B2E" touchableHighlightStyle={{borderBottomLeftRadius: 10, borderBottomRightRadius: 10}} icon style={{borderBottomWidth: 0}} button={true}  >
               <Left>
                 <Button style={{ backgroundColor: "#007AFF" }}>
                   <Icon type="MaterialCommunityIcons" name="information-outline" />
@@ -63,14 +63,14 @@ export default function SettingScreen({ navigation }) {
         </View>
         <View style={[styles.box]}>
           <List style={{width:'100%'}}>
-            <ListItem underlayColor="#2B2B2E" touchableHighlightStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}} icon style={{}} button={true} >
+            <ListItem onPress={()=>navigation.navigate('RateScreen')} underlayColor="#2B2B2E" touchableHighlightStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}} icon style={{}} button={true} >
               <Left>
                 <Button style={{ backgroundColor: "#8fd158" }}>
                   <Icon type="MaterialCommunityIcons" name="star-circle-outline" />
                 </Button>
               </Left>
               <Body>
-                <Text style={{fontSize: 18}}>Rate on the App Store</Text>
+                <Text style={{fontSize: 18}}>Rate this app</Text>
               </Body>
               <Right>
                 <Icon active name="arrow-forward" />

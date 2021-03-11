@@ -5,7 +5,7 @@ import { Icon
  } from 'native-base';
 import { Text, View } from '../../components/Themed';
 
-export default function LicensesScreen({ navigation }) {
+export default function RateScreen({ navigation }) {
 
   const goBack = () => {
     const parent = navigation.dangerouslyGetParent();
@@ -43,7 +43,7 @@ export default function LicensesScreen({ navigation }) {
     <WebView
     scalesPageToFit={false}
       source={{
-        uri: 'https://colinfran.github.io/wallpaperqr/license.html',
+        uri: 'https://docs.google.com/forms/d/e/1FAIpQLSfe9zudYw7BSy_HBjyx3DZMiSDQTmgHN73NWvd1zLeOqc6WDw/viewform?usp=sf_link',
       }}
     />
   );

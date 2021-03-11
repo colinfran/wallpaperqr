@@ -12,10 +12,13 @@ import HomeScreen from '../screens/QRCode/HomeScreen';
 import InputScreen from '../screens/QRCode/InputScreen';
 import StyleScreen from '../screens/QRCode/StyleScreen';
 import PreviewScreen from '../screens/QRCode/PreviewScreen';
+import PermissionsScreen from '../screens/QRCode/PermissionsScreen';
 
 import SettingsScreen from '../screens/Settings/SettingsScreen';
 import FAQScreen from '../screens/Settings/FAQScreen';
+import GuideScreen from '../screens/Settings/GuideScreen';
 import PrivacyPolicyScreen from '../screens/Settings/PrivacyPolicyScreen';
+import RateScreen from '../screens/Settings/RateScreen';
 import LicensesScreen from '../screens/Settings/LicensesScreen';
 import { BottomTabParamList, QrCodesParamList, SettingsParamList } from '../types';
 
@@ -56,37 +59,41 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const QrCodesStack = createStackNavigator<QrCodesParamList>();
 
+QrCodesStack.navigationOptions = () => ({
+  swipeEnabled: false
+});
+
 function QrCodesNavigator() {
   return (
     <QrCodesStack.Navigator initialRouteName="HomeScreen">
       <QrCodesStack.Screen
         name="HomeScreen"
-        options={{ headerTitle: 'QRCode' }}
+        options={{ headerTitle: 'QRCode',gestureEnabled: false }}
         component={HomeScreen}
       />
       <QrCodesStack.Screen
         name="InputScreen"
-        options={{ headerTitle: 'Add Your Info' }}
+        options={{ headerTitle: 'Add Your Info',gestureEnabled: false }}
         component={InputScreen}
       />
       <QrCodesStack.Screen
         name="StyleScreen"
-        options={{ headerTitle: 'Style Your QR' }}
+        options={{ headerTitle: 'Style Your QR',gestureEnabled: false }}
         component={StyleScreen}
       />
-      {/* <QrCodesStack.Screen
-        name="AddScreenQRCode"
-        options={{ headerTitle: 'Set Your Colors' }}
-        component={AddScreenQRCode}
-      />*/}
+      <QrCodesStack.Screen
+        name="PermissionsScreen"
+        options={{ headerTitle: 'Fixing Permissions' }}
+        component={PermissionsScreen}
+      />
       <QrCodesStack.Screen
         name="PreviewScreen"
-        options={{ headerTitle: 'Preview QR' }}
+        options={{ headerTitle: 'Preview QR',gestureEnabled: false }}
         component={PreviewScreen}
       /> 
       <QrCodesStack.Screen
         name="OpenQrCode"
-        options={{ headerTitle: 'View QR' }}
+        options={{ headerTitle: 'View QR',gestureEnabled: false }}
         component={OpenQrCode}
       />
     </QrCodesStack.Navigator>
@@ -101,23 +108,36 @@ function SettingsNavigator() {
       <SettingsStack.Screen
         name="SettingsScreen"
         component={SettingsScreen}
-        options={{ headerTitle: 'Settings' }}
+        options={{ headerTitle: 'Settings',gestureEnabled: false }}
       />
 
       <SettingsStack.Screen
         name="FAQScreen"
         component={FAQScreen}
-        options={{ headerTitle: 'FAQScreen' }}
+        options={{ headerTitle: 'FAQScreen',gestureEnabled: false }}
       />
+
+      <SettingsStack.Screen
+        name="GuideScreen"
+        component={GuideScreen}
+        options={{ headerTitle: 'GuideScreen',gestureEnabled: false }}
+      />
+
+      <SettingsStack.Screen
+        name="RateScreen"
+        component={RateScreen}
+        options={{ headerTitle: 'RateScreen',gestureEnabled: false }}
+      />
+
       <SettingsStack.Screen
         name="PrivacyPolicyScreen"
         component={PrivacyPolicyScreen}
-        options={{ headerTitle: 'PrivacyPolicyScreen' }}
+        options={{ headerTitle: 'PrivacyPolicyScreen',gestureEnabled: false }}
       />
       <SettingsStack.Screen
         name="LicensesScreen"
         component={LicensesScreen}
-        options={{ headerTitle: 'LicensesScreen' }}
+        options={{ headerTitle: 'LicensesScreen',gestureEnabled: false }}
       />
     </SettingsStack.Navigator>
   );

@@ -43,7 +43,8 @@ export default class InputScreen extends React.Component {
     });
     this.onButtonPress(0);
     navigation.setOptions({
-      gesturesEnabled: true,
+      gesturesEnabled: false,
+      swipeEnabled: false,
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -95,6 +96,9 @@ export default class InputScreen extends React.Component {
         website: '',
       };
       newJson.qrcode = '';
+      if (newJson?.style){
+        delete newJson.style
+      }
       json.updateJson(newJson);
 
       const parent = navigation.dangerouslyGetParent();
@@ -234,7 +238,6 @@ export default class InputScreen extends React.Component {
         <Carousel
           currentPage={0}
           keyboardShouldPersistTaps="handled"
-          delay={2000}
           style={this.state.size}
           autoplay={false}
           pageInfo

@@ -7,20 +7,29 @@ import { Text, View } from '../../components/Themed';
 
 export default function PrivacyPolicyScreen({ navigation }) {
 
+  const goBack = () => {
+    const parent = navigation.dangerouslyGetParent();
+    parent.setOptions({
+      tabBarVisible: true,
+    });
+    navigation.navigate("SettingsScreen")
+  }
+
   useLayoutEffect(() => {
     const parent = navigation.dangerouslyGetParent();
     parent.setOptions({
       tabBarVisible: false,
     });
     navigation.setOptions({
-      gesturesEnabled: true,
+      gesturesEnabled: false,
+      swipeEnabled: false,
       headerTintColor:'transparent',
       headerShown: true,
       title: "",
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={()=> navigation.navigate("SettingsScreen")}
+          onPress={goBack}
         >
           <Icon name="arrow-back" style={{ color: '#fff', paddingLeft: 10 }} />
           <Text>Back</Text>

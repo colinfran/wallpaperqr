@@ -87,7 +87,8 @@ function HomeScreen({ navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      gesturesEnabled: true,
+      gesturesEnabled: false,
+      swipeEnabled: false,
       headerTintColor:'transparent',
       headerShown: true,
       title: "",
@@ -142,16 +143,20 @@ function HomeScreen({ navigation }) {
   };
 
   const handleDownloadPress = () => {
+    let returnVal = false;
     if (
       json.json.info.firstName === '' &&
       json.json.info.lastName === '' &&
       json.json.info.cellPhone === ''
     ) {
       box1Animate();
-      return;
+      returnVal = true;
     }
     if (!json.json?.style?.backgroundColor || json.json?.style?.imageUrl) {
       box2Animate();
+      returnVal = true;
+    }
+    if (returnVal){
       return;
     }
     navigation.navigate("PreviewScreen")

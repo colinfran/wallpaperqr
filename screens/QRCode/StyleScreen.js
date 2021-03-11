@@ -35,14 +35,10 @@ export default class StyleScreen extends React.Component {
     const dark =  randomColor({luminosity: 'dark'})
     const colorBright = tinycolor(bright);    
     const colorDark = tinycolor(dark);    
-    const colorBrightArray = colorBright.toHsl()
-    const colorDarkArray = colorDark.toHsl()
+    const colorBrightArray = colorBright.toHsv()
+    const colorDarkArray = colorDark.toHsv()
 
-    // console.log(colorDark.toHexString())
-    // console.log(colorDarkArray)
 
-    // console.log(colorBright)
-    // console.log(dark)
     this.state = {
       selected: "color",
       qrCodeColor: bright,
@@ -68,7 +64,8 @@ export default class StyleScreen extends React.Component {
       tabBarVisible: false,
     });
     navigation.setOptions({
-      gesturesEnabled: true,
+      gesturesEnabled: false,
+      swipeEnabled: false,
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -78,10 +75,6 @@ export default class StyleScreen extends React.Component {
           <Text>Cancel</Text>
         </TouchableOpacity>
       ),
-    });
-
-    navigation.setOptions({
-      gesturesEnabled: true,
       headerRight: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -92,8 +85,6 @@ export default class StyleScreen extends React.Component {
         </TouchableOpacity>
       ),
     });
-
-
   }
 
   onBackPress = () => {
@@ -157,6 +148,7 @@ export default class StyleScreen extends React.Component {
   }
 
   onSatValPickerChange = ({ saturation, value }) => {
+    console.log(value)
     const {hue} = this.state
     this.setState({
       sat: saturation,
@@ -175,7 +167,8 @@ export default class StyleScreen extends React.Component {
     this.setState({qrCodeColor: color.toHexString() })
   }
 
-  onSatVal2PickerChange = ({ saturation, value }) => {
+  onSatValPickerChange2 = ({ saturation, value }) => {
+    console.log(value)
     const {hue2} = this.state
     this.setState({
       sat2: saturation,
@@ -185,13 +178,17 @@ export default class StyleScreen extends React.Component {
     this.setState({backgroundColor: color.toHexString() })
   }
 
-  onHue2PickerChange = ({ hue }) => {
+  onHuePickerChange2 = ({ hue }) => {
     const {sat2,val2} = this.state
     this.setState({
       hue2: hue,
     });
     let color = tinycolor.fromRatio({ h: hue, s: sat2, v: val2 });
+
+    // console.log(color)
+
     this.setState({backgroundColor: color.toHexString() })
+    // console.log(color.toHexString())
   }
 
   renderColorSheet = () => {
@@ -199,9 +196,9 @@ export default class StyleScreen extends React.Component {
 
     // console.log(hue, sat, val)
     return (
-      <View>
-        <View style={styles.colorPickerContainer}>
-          <Text style={{marginBottom: 15,marginTop: 15, fontSize: 20}}>Pick your QR Code color</Text>
+      <View style={{backgroundColor:'#1c1c1e'}}>
+        <View style={styles.colorPickerContainer, {backgroundColor:'#1c1c1e'}}>
+          <Text style={{marginBottom: 15, fontSize: 20, backgroundColor:'#1c1c1e' }}>Pick your QR Code color</Text>
           <HsvColorPicker
             huePickerHue={hue}
             onHuePickerDragMove={this.onHuePickerChange}
@@ -214,7 +211,7 @@ export default class StyleScreen extends React.Component {
             satValPickerBorderRadius={10}
             huePickerBorderRadius={5}
           />
-          <Text style={{marginBottom: 15, fontSize: 14}}>{qrCodeColor}</Text>
+          <Text style={{fontSize: 14, backgroundColor:'#1c1c1e', borderWidth: 0, textAlign:'center'}}>{qrCodeColor}</Text>
         </View>
       </View>
     )
@@ -224,22 +221,22 @@ export default class StyleScreen extends React.Component {
     const {hue2, sat2, val2, backgroundColor} = this.state
     // console.log(backgroundColor)
     return (
-      <View>
-        <View style={styles.colorPickerContainer}>
-          <Text style={{marginBottom: 15,marginTop: 15, fontSize: 20}}>Pick Your Background</Text>
+      <View style={{backgroundColor:'#1c1c1e'}}>
+        <View style={styles.colorPickerContainer ,{ backgroundColor:'#1c1c1e'}}>
+          <Text style={{fontSize: 20, backgroundColor:'#1c1c1e'}}>Pick Your Background</Text>
           <HsvColorPicker
             huePickerHue={hue2}
-            onHuePickerDragMove={this.onHuePicker2Change}
-            onHuePickerPress={this.onHuePicker2Change}
+            onHuePickerDragMove={this.onHuePickerChange2}
+            onHuePickerPress={this.onHuePickerChange2}
             satValPickerHue={hue2}
             satValPickerSaturation={sat2}
             satValPickerValue={val2}
-            onSatValPickerDragMove={this.onSatValPicker2Change}
-            onSatValPickerPress={this.onSatValPicker2Change}
+            onSatValPickerDragMove={this.onSatValPickerChange2}
+            onSatValPickerPress={this.onSatValPickerChange2}
             satValPickerBorderRadius={10}
             huePickerBorderRadius={5}
           />
-          <Text style={{marginBottom: 15, fontSize: 14}}>{backgroundColor}</Text>
+          <Text style={{fontSize: 14, backgroundColor:'#1c1c1e', borderWidth: 0, textAlign:'center'}}>{backgroundColor}</Text>
         </View>
       </View>
     )
@@ -287,7 +284,7 @@ export default class StyleScreen extends React.Component {
               ref={ref => {
                 this.RBSheet = ref;
               }}
-              height={selected ==="background" ? 500 : 500}
+              height={height*.5}
               openDuration={250}
               closeOnDragDown={true}
               dragFromTopOnly={true}
@@ -296,7 +293,8 @@ export default class StyleScreen extends React.Component {
                 container: {
                   justifyContent: "center",
                   alignItems: "center",
-                  borderRadius: 10,
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                   backgroundColor: '#1c1c1e'
                 },
                 wrapper: {backgroundColor:'transparent'}
@@ -309,7 +307,6 @@ export default class StyleScreen extends React.Component {
                     flex: 1,
                     backgroundColor: '#1c1c1e',
                     justifyContent: 'center',
-                    marginBottom: headerHeight,
                     width: '100%'
                   },
                 ]}>
@@ -355,7 +352,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   colorPickerContainer: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#1c1c1e',
     alignItems: 'center',
     justifyContent: 'center',
