@@ -43,7 +43,7 @@ export default function PrivacyPolicyScreen({ navigation }) {
     <WebView
     scalesPageToFit={false}
       source={{
-        uri: 'https://colinfran.github.io/wallpaperqr/privacy-policy.html',
+        uri: 'https://wallpaperqr.com/privacy-policy.html',
       }}
     />
   );

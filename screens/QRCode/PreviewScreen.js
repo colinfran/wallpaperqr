@@ -7,6 +7,7 @@ import ViewShot from 'react-native-view-shot';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
+import contrast from 'contrast';
 
 import { Text, View } from '../../components/Themed';
 import JsonContext from '../../context';
@@ -18,8 +19,11 @@ export default class PreviewScreen extends React.Component {
     const json = this.context;
     const { navigation } = this.props;
     const backgroundColor = json.json.style?.backgroundColor;
-
     const contrast = fontColorContrast(backgroundColor);
+    // let contrast = '#fff'
+    // if (contrast(backgroundColor) === 'light') {
+    //   contrasts = '#000';
+    // }
 
     const parent = navigation.dangerouslyGetParent();
     parent.setOptions({
@@ -162,7 +166,7 @@ export default class PreviewScreen extends React.Component {
       <View style={[styles.container, {backgroundColor }]}>
         <StatusBar barStyle={contrast === '#000000' ? 'dark-content' : 'light-content'} />
         <ViewShot
-          style={{ flex: 1 }}
+          style={{ flex: 1, backgroundColor }}
           onCapture={(uri) => this.setState({ imageBase64: uri })}
           captureMode="mount"
           options={{ result: 'data-uri' }}
@@ -170,7 +174,7 @@ export default class PreviewScreen extends React.Component {
           <View
             style={[
               styles.qrcodecontainer,
-              { flex: 1, backgroundColor, justifyContent: 'center' },
+              { flex: 1, backgroundColor, justifyContent: 'flex-end', bottom: 150 },
             ]}>
             <QRCode
               value={json.json?.qrcode}

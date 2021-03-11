@@ -43,7 +43,7 @@ export default function LicensesScreen({ navigation }) {
     <WebView
     scalesPageToFit={false}
       source={{
-        uri: 'https://colinfran.github.io/wallpaperqr/license.html',
+        uri: 'https://wallpaperqr.com/license.html',
       }}
     />
   );

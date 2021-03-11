@@ -38,13 +38,22 @@ export default class AccordionExample extends Component {
       headerLeft: () => (
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={()=>navigation.navigate("SettingsScreen")}
+          onPress={this.goBack}
         >
           <Icon name="arrow-back" style={{ color: '#fff', paddingLeft: 10 }} />
           <Text>Back</Text>
         </TouchableOpacity>
       ),
     });
+  }
+
+  goBack = () => {
+    const { navigation } = this.props;
+    const parent = navigation.dangerouslyGetParent();
+    parent.setOptions({
+      tabBarVisible: true,
+    });
+    navigation.navigate("SettingsScreen")
   }
 
   renderComponent = (headerHeight) => {

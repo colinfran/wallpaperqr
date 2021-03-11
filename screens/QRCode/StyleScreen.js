@@ -19,6 +19,7 @@ import BackgroundTabView from './BackgroundTabView';
 import RBSheet from "react-native-raw-bottom-sheet";
 import HsvColorPicker from 'react-native-hsv-color-picker';
 import BottomSheet from "react-native-gesture-bottom-sheet";
+import fontColorContrast from 'font-color-contrast';
 
 
 import JsonContext from '../../context';
@@ -33,6 +34,7 @@ export default class StyleScreen extends React.Component {
 
     const bright =  randomColor({luminosity: 'bright'})
     const dark =  randomColor({luminosity: 'dark'})
+ 
     const colorBright = tinycolor(bright);    
     const colorDark = tinycolor(dark);    
     const colorBrightArray = colorBright.toHsv()
@@ -246,6 +248,7 @@ export default class StyleScreen extends React.Component {
     const json = this.context;
     const {width, height} = Dimensions.get('window');
     const { qrCodeColor, backgroundColor, selected, } = this.state;
+    const contrast = fontColorContrast(backgroundColor);
 
 
     return (
@@ -276,8 +279,8 @@ export default class StyleScreen extends React.Component {
             <View>
             <View style={{ flex: 1, alignItems: 'center',justifyContent: 'center', alignSelf:'center'}}>
               <View style={{textAlign:'center', position:'absolute', bottom: 100,backgroundColor: "transparent", justifyContent: 'center', alignItems: 'center', height: 35, marginTop: 15}}>
-                <Text>Press on the QR and</Text>
-                <Text>the background to style your QR</Text>          
+                <Text style={{color: contrast}}>Press on the QR and</Text>
+                <Text style={{color: contrast}}>the background to style your QR</Text>          
               </View>
             </View>
             <RBSheet
