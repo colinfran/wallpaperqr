@@ -20,7 +20,7 @@ export default {
             screens: {
               SettingsScreen: 'two',
               FAQScreen: 'faq',
-              LicensesScreen: 'licenses',
+              LicenseScreen: 'license',
               PrivacyPolicy: 'privacy',
             },
           },

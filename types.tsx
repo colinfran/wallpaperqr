@@ -21,5 +21,5 @@ export type SettingsParamList = {
   SettingsScreen: undefined;
   FAQScreen: undefined;
   PrivacyPolicyScreen: undefined;
-  LicensesScreen: undefined;
+  LicenseScreen: undefined;
 };

@@ -5,7 +5,7 @@ import { Icon
  } from 'native-base';
 import { Text, View } from '../../components/Themed';
 
-export default function LicensesScreen({ navigation }) {
+export default function LicenseScreen({ navigation }) {
 
   const goBack = () => {
     const parent = navigation.dangerouslyGetParent();

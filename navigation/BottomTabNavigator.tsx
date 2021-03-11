@@ -19,7 +19,7 @@ import FAQScreen from '../screens/Settings/FAQScreen';
 import GuideScreen from '../screens/Settings/GuideScreen';
 import PrivacyPolicyScreen from '../screens/Settings/PrivacyPolicyScreen';
 import RateScreen from '../screens/Settings/RateScreen';
-import LicensesScreen from '../screens/Settings/LicensesScreen';
+import LicenseScreen from '../screens/Settings/LicenseScreen';
 import { BottomTabParamList, QrCodesParamList, SettingsParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -135,9 +135,9 @@ function SettingsNavigator() {
         options={{ headerTitle: 'PrivacyPolicyScreen',gestureEnabled: false }}
       />
       <SettingsStack.Screen
-        name="LicensesScreen"
-        component={LicensesScreen}
-        options={{ headerTitle: 'LicensesScreen',gestureEnabled: false }}
+        name="LicenseScreen"
+        component={LicenseScreen}
+        options={{ headerTitle: 'LicenseScreen',gestureEnabled: false }}
       />
     </SettingsStack.Navigator>
   );

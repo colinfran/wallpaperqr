@@ -6,6 +6,10 @@ import { Text, View } from '../../components/Themed';
 
 export default function SettingScreen({ navigation }) {
 
+  const onBackPress = () =>{
+
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTintColor:'transparent',
@@ -76,14 +80,14 @@ export default function SettingScreen({ navigation }) {
                 <Icon active name="arrow-forward" />
               </Right>
             </ListItem>
-            <ListItem onPress={()=>navigation.navigate('LicensesScreen')}  underlayColor="#2B2B2E" icon style={{}} button={true}  >
+            <ListItem onPress={()=>navigation.navigate('LicenseScreen')}  underlayColor="#2B2B2E" icon style={{}} button={true}  >
               <Left>
                 <Button style={{ backgroundColor: "#FF9501" }}>
                   <Icon type="MaterialCommunityIcons" name="copyright" />
                 </Button>
               </Left>
               <Body>
-                <Text style={{fontSize: 18}}>Licenses</Text>
+                <Text style={{fontSize: 18}}>License</Text>
               </Body>
               <Right>
                 <Icon active name="arrow-forward" />
