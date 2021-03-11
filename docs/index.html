@@ -9,9 +9,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
   <link rel="manifest" href="./site.webmanifest">
 
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
 
 
-  <style id="__section1">
+  <style>
 
 :root {
     --content-width: 640px;
@@ -35,43 +36,28 @@ body {
     -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
     font-feature-settings: "kern", "liga", "clig", "calt";
 }
-main {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+
+.main{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
-section.section1 {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 50%;
-    height: 100vh;
-    background-image: var(--brand-gradient);
-    overflow: hidden;
+.section1{
+  width: 50%;
+  height: 100vh;
+  background-image: var(--brand-gradient);
+
 }
 
-div.section1 {
-    position: absolute;
+.section1div{
+  background: url(./mockup.png);
+  position: absolute;
     top: 42%;
-    left: 50%;
-    margin: -157px 0 0 -160px;
+    left: 25%;
+    margin: -157px 0 0 -130px;
     width: 250;
     height: 505;
-    background: url(./mockup.png);
     box-shadow: 0 0 0 0 rgb(0 0 0 / 30%), 0 23px 38px 0 rgb(0 0 0 / 43%), 0 25px 65px 0 rgb(0 0 0 / 10%);
     border-radius: 5px;
     background-size: 100%;
@@ -79,34 +65,22 @@ div.section1 {
     border-radius: 40px;
 }
 
-section.section2 {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
+.section2{
+  width: 50%;
+  height: 100vh;
+  background-color: #fff;
+  justify-content: center;
     display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
-    width: 50%;
-    height: 100vh;
 }
 
-div.section2 {
+.section2div {
     margin: auto;
     padding: var(--content-padding);
     max-width: var(--content-width);
 }
 
-h1 {
+.section2h1{
     margin: 0 0 0.4rem 0;
     padding: 0;
     color: var(--brand-color);
@@ -116,15 +90,14 @@ h1 {
     font-size: 1.7rem;
     line-height: 1.1;
 }
-
-h2 {
+.section2h2 {
     margin: 0 0 1.45rem 0;
     padding: 0;
     color: #000;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: 800;
     text-rendering: optimizeLegibility;
-    font-size: 3.3rem;
+    font-size: 3rem;
     line-height: 1.1;
     -webkit-letter-spacing: -0.027rem;
     -moz-letter-spacing: -0.027rem;
@@ -132,101 +105,58 @@ h2 {
     letter-spacing: -0.027rem;
 }
 
-p.section2 {
+section2p{
     color: rgba(0, 0, 0, 0.6);
 }
 
-    @media only screen and (max-width:800px) {
-      div.section1 {
-        margin: -157px 0 0 -126px;
-      }
-    }
+@media screen and (max-width:800px) {
+  .main{
+  flex-direction: column;
+}
 
-    footer.footer {
-      position: relative;
-          /* bottom: 50px;
-    width: 100%; */
-    /* margin: auto; */
+.section1 {
+    width: 100%;
+    max-height: 444px;
+}
+}
+@media only screen and (max-width: 800px){
+.main{
+  flex-direction: column;
+}
+
+.section1 {
+    width: 100%;
+    max-height: 444px;
+}
+.section1div{
+  top: 22%;
+    left: 50%;
+    margin: -157px 0 0 -126px;
+        width: 250;
+    height: 505;
+}
+.section2{
+  padding: 0;
+    width: 100%;
+    height: calc(100% - 444px);
+    text-align: center;
+    z-index: 1;
+}
+.section2div{
+  margin: auto;
+    padding: var(--content-padding);
+    max-width: var(--content-width);
+}
+}
+
+.footer {
+    position: relative;
+    margin: auto;
     padding: var(--content-padding);
     max-width: var(--content-width);
 }
 
-span.bottomspan {
-    font-size: 14px;
-    color: #666;
-    list-style: none;
-}
 
-a {
-    color: var(--brand-color);
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
-
-@media (max-width: 800px){
-main {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    height: auto;
-}
-main {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-}
-
-@media (max-width: 800px){
-section.section1 {
-    width: 100%;
-    max-height: 444px;
-}
-html{
-  overflow-y: scroll !important;
-}
-}
-
-@media (max-width: 800px){
-section.section1 {
-    padding: 0;
-    width: 100%;
-    height: calc(100% - 444px);
-    text-align: center;
-}
-section.section1 {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    /* width: 50%; */
-    height: 100vh;
-    background-image: var(--brand-gradient);
-    overflow: hidden;
-}
-}
-
-@media (max-width: 800px){
-section.section2 {
-    padding: 0;
-    width: 100%;
-    height: calc(100% - 444px);
-    text-align: center;
-}}
 
   </style>
 </head>
@@ -234,18 +164,18 @@ section.section2 {
 <body>
     <main class="main">
       <section class="section1">
-        <div class="section1"></div>
+        <div class="section1div"></div>
       </section>
       <section class="section2">
-        <div class="section2">
-          <h1 class="section2">WallpaperQR</h1>
-          <h2 class="section2">Networking Made Easier</h2>
-          <p class="section2">WallpaperQR takes the effort out of people having to enter in your information into someone's phone when you are networking. A simplistic wallpaper that is easy to 
+        <div class="section2div">
+          <h1 class="section2h1">WallpaperQR</h1>
+          <h2 class="section2h2">Networking Made Easier</h2>
+          <p class="section2p">WallpaperQR takes the effort out of people having to enter in your information into someone's phone when you are networking. A simplistic wallpaper that is easy to 
             set up and design.</p>
           
         </div>
         <footer class="footer">
-          <div style="">
+          <div>
             <span class="bottomspan">A product by
               <a href="https://github.com/colinfran" target="_blank" class="bottomspan">Colin Franceschini</a>
              </span>
