@@ -13,7 +13,9 @@
 
 
   <style>
-
+html{
+  overflow:hidden;
+}
 :root {
     --content-width: 640px;
     --content-padding: 60px;
@@ -112,6 +114,9 @@ section2p{
 @media screen and (max-width:800px) {
   .main{
   flex-direction: column;
+}
+html{
+  overflow-y: scroll !important;
 }
 
 .section1 {
