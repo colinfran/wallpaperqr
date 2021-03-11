@@ -83,7 +83,7 @@ function QrCodesNavigator() {
       />
       <QrCodesStack.Screen
         name="PermissionsScreen"
-        options={{ headerTitle: 'Fixing Permissions' }}
+        options={{ headerTitle: 'Fixing Permissions',gestureEnabled: false  }}
         component={PermissionsScreen}
       />
       <QrCodesStack.Screen

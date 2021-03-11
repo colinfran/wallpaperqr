@@ -35,7 +35,7 @@ export default function SettingScreen({ navigation }) {
                 </Button>
               </Left>
               <Body>
-                <Text style={{fontSize: 18}}>FAQ</Text>
+                <Text style={{fontSize: 18}}>FAQs</Text>
               </Body>
               <Right>
                 <Icon active name="arrow-forward" />
