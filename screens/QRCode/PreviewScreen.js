@@ -11,6 +11,7 @@ import contrast from 'contrast';
 import Draggable from 'react-native-draggable';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import ImageZoom from 'react-native-image-pan-zoom';
+import FadeInOut from 'react-native-fade-in-out';
 
 import { Text, View } from '../../components/Themed';
 import JsonContext from '../../context';
@@ -18,9 +19,23 @@ import JsonContext from '../../context';
 export default class PreviewScreen extends React.Component {
   static contextType = JsonContext;
 
+  constructor(props){
+    super(props);
+    this.state = {
+      visible: false
+    }
+  }
+
   componentDidMount() {
     const json = this.context;
     const { navigation } = this.props;
+    const { visible } = this.state;
+    this.setState({visible: true})
+    const that = this
+    setTimeout(function(){ 
+      that.setState({visible: false})
+    }, 3000);
+
     const backgroundColor = json.json.style?.backgroundColor;
     const contrast = fontColorContrast(backgroundColor);
     // let contrast = '#fff'
@@ -54,6 +69,7 @@ export default class PreviewScreen extends React.Component {
         <TouchableOpacity
           onPress={this.onSavePress}
           style={{ flexDirection: 'row', alignItems: 'center' }}
+          // disabled={!visible}
         >
           <Text style={{ color: contrast }}>Save</Text>
           <Icon name="add" style={{ color: contrast, paddingRight: 8 }} />
@@ -96,51 +112,54 @@ export default class PreviewScreen extends React.Component {
   async saveFile() {
     const json = this.context;
     const { navigation } = this.props;
-    const imageBase64 = this.state.imageBase64.split(
-      'data:image/png;base64,',
-    )[1];
-    const filename = `${FileSystem.documentDirectory}${"QRCode"}.png`;
-
-    await FileSystem.writeAsStringAsync(filename, imageBase64, {
-      encoding: FileSystem.EncodingType.Base64,
-    })
-      .then(() => {})
-      .catch((e) => {
-        console.error('An error occured while trying to create the image file');
-        console.error(e);
-        Toast.show({
-          text: 'An error occured while trying to create the image file.',
-          buttonText: 'Okay',
-          type: 'danger',
-          duration: 4000,
-          position: 'bottom',
-        });
-      });
-
-    await MediaLibrary.saveToLibraryAsync(filename)
-      .then(() => {
-        setTimeout(function(){ 
-          Alert.alert(
-            'Wallpaper created successfully',
-            `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
-            [
-              { text: 'Help', onPress: () => navigation.navigate("PermissionsScreen")  },
-              { text: 'OK', onPress: () => console.log('OK Pressed') }
-            ],
-            { cancelable: false }
-          );
-         }, 300);
+    this.refs.viewShot.capture().then(async uri => {
+      // console.log("do something with ", uri);
+      const imageBase64 = uri.split(
+        'data:image/png;base64,',
+      )[1];
+      const filename = `${FileSystem.documentDirectory}${"QRCode"}.png`;
+  
+      await FileSystem.writeAsStringAsync(filename, imageBase64, {
+        encoding: FileSystem.EncodingType.Base64,
       })
-      .catch((e) => {
-        console.error('An error occured while trying to add the image file to the media library');
-        console.error(e);
-        Toast.show({
-          text: 'An error occured while trying to create the image file.',
-          type: 'danger',
-          position: 'bottom',
-          duration: 4000,
+        .then(() => {})
+        .catch((e) => {
+          console.error('An error occured while trying to create the image file');
+          console.error(e);
+          Toast.show({
+            text: 'An error occured while trying to create the image file.',
+            buttonText: 'Okay',
+            type: 'danger',
+            duration: 4000,
+            position: 'bottom',
+          });
         });
-      });
+  
+      await MediaLibrary.saveToLibraryAsync(filename)
+        .then(() => {
+          setTimeout(function(){ 
+            Alert.alert(
+              'Wallpaper created successfully',
+              `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
+              [
+                { text: 'Help', onPress: () => navigation.navigate("PermissionsScreen")  },
+                { text: 'OK', onPress: () => console.log('OK Pressed') }
+              ],
+              { cancelable: false }
+            );
+           }, 300);
+        })
+        .catch((e) => {
+          console.error('An error occured while trying to add the image file to the media library');
+          console.error(e);
+          Toast.show({
+            text: 'An error occured while trying to create the image file.',
+            type: 'danger',
+            position: 'bottom',
+            duration: 4000,
+          });
+        });
+    });
   }
 
   onSavePress = async () => {
@@ -162,24 +181,30 @@ export default class PreviewScreen extends React.Component {
     const qrCodeColor = json.json.style?.qrCodeColor
     const backgroundColor = json.json.style?.backgroundColor;
     const { width } = Dimensions.get('window');
-
+    const {visible} = this.state
     const contrast = fontColorContrast(backgroundColor);
+    const infoBarColor = contrast === '#000000' ? '#7b7b7a' : '#1c1c1e'
 
     return (
       <View style={[styles.container, {backgroundColor }]}>
         <StatusBar barStyle={contrast === '#000000' ? 'dark-content' : 'light-content'} />
+        <FadeInOut visible={visible} style={{backgroundColor:infoBarColor, padding: 10, borderRadius: 10,position:'absolute', top: Dimensions.get('window').height*.2, zIndex: 5, justifyContent: 'center', alignSelf: 'center'}}>
+            <Text style={{color:contrast}}>Drag QR Code to adjust vertical positioning</Text>
+          </FadeInOut>
         <ViewShot
+          ref="viewShot"
           style={{ flex: 1, backgroundColor }}
           onCapture={(uri) => this.setState({ imageBase64: uri })}
           captureMode="mount"
           options={{ result: 'data-uri' }}
+
         >
           <View
             style={[
               styles.qrcodecontainer,
               { flex: 1, backgroundColor, justifyContent: 'flex-end', bottom: 150 },
             ]}>
-              <Draggable maxX={50} minX={50} x={50} y={Dimensions.get('window').height*.5+80}>
+              <Draggable touchableOpacityProps={{activeOpacity:1}} maxX={50} minX={50} x={50} y={Dimensions.get('window').height*.5+80}>
              
                   <QRCode
                     value={json.json?.qrcode}

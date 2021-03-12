@@ -52,8 +52,6 @@ export default function App() {
 
     const retrieveData = async () => {
       let value = await AsyncStorage.getItem('json');
-      console.log(value)
-
       if (value === null) {
         value = {
           info: {

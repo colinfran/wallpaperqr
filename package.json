@@ -72,6 +72,8 @@
     "react-native-color-wheel": "^0.1.7",
     "react-native-draggable": "^3.3.0",
     "react-native-elements": "^3.2.0",
+    "react-native-fade": "^2.0.2",
+    "react-native-fade-in-out": "^1.0.5",
     "react-native-gesture-bottom-sheet": "^1.0.2",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-hsv-color-picker": "^1.0.2",
@@ -95,6 +97,7 @@
     "react-native-webview": "11.0.0",
     "reanimated-collapsible-helpers": "^1.0.0",
     "sentry-expo": "^3.0.5",
+    "sharp-cli": "^1.14.1",
     "tinycolor2": "^1.4.2",
     "unsplash-js": "^7.0.4",
     "vcard-creator": "^0.3.3"
