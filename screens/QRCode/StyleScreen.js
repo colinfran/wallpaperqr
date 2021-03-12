@@ -27,13 +27,14 @@ import JsonContext from '../../context';
 export default class StyleScreen extends React.Component {
   static contextType = JsonContext;
 
-  constructor(props) {
+  constructor(props, context) {
     const { width, height } = Dimensions.get('window');
     super(props);
 
+    const json = context;
 
-    const bright =  randomColor({luminosity: 'bright'})
-    const dark =  randomColor({luminosity: 'dark'})
+    const bright =  json.json?.style?.qrCodeColor ? json.json.style.qrCodeColor : randomColor({luminosity: 'bright'})
+    const dark =  json.json?.style?.backgroundColor ? json.json.style.backgroundColor : randomColor({luminosity: 'dark'})
  
     const colorBright = tinycolor(bright);    
     const colorDark = tinycolor(dark);    
@@ -200,7 +201,7 @@ export default class StyleScreen extends React.Component {
     return (
       <View style={{backgroundColor:'#1c1c1e'}}>
         <View style={styles.colorPickerContainer, {backgroundColor:'#1c1c1e'}}>
-          <Text style={{marginBottom: 15, fontSize: 20, backgroundColor:'#1c1c1e' }}>Pick your QR Code color</Text>
+          <Text style={{textAlign:'center', marginBottom: 15, fontSize: 20, backgroundColor:'#1c1c1e' }}>Pick your QR Code color</Text>
           <HsvColorPicker
             huePickerHue={hue}
             onHuePickerDragMove={this.onHuePickerChange}
@@ -225,7 +226,7 @@ export default class StyleScreen extends React.Component {
     return (
       <View style={{backgroundColor:'#1c1c1e'}}>
         <View style={styles.colorPickerContainer ,{ backgroundColor:'#1c1c1e'}}>
-          <Text style={{fontSize: 20, backgroundColor:'#1c1c1e'}}>Pick Your Background</Text>
+          <Text style={{textAlign:'center', fontSize: 20, backgroundColor:'#1c1c1e'}}>Pick Your Background</Text>
           <HsvColorPicker
             huePickerHue={hue2}
             onHuePickerDragMove={this.onHuePickerChange2}
