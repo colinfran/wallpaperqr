@@ -256,6 +256,7 @@ export default class InputScreen extends React.Component {
                   <Input
                     value={firstName}
                     style={[styles.text]}
+                  autoCorrect={false}
                     onChangeText={(val) => this.setState({ firstName: val })}
                   />
                 </Item>
@@ -264,6 +265,7 @@ export default class InputScreen extends React.Component {
                   <Input
                     value={lastName}
                     style={styles.text}
+                  autoCorrect={false}
                     onChangeText={(val) => this.setState({ lastName: val })}
                   />
                 </Item>
@@ -326,6 +328,8 @@ export default class InputScreen extends React.Component {
               <Item floatingLabel>
                 <Label style={{ color: 'lightgrey' }}>Job</Label>
                 <Input
+                autoCapitalize="none"
+                autoCorrect={false}
                   value={job}
                   style={styles.text}
                   onChangeText={(val) => this.setState({ job: val })}
@@ -348,6 +352,8 @@ export default class InputScreen extends React.Component {
               <Item floatingLabel>
                 <Label style={{ color: 'lightgrey' }}>Company</Label>
                 <Input
+                autoCapitalize="none"
+                autoCorrect={false}
                   value={company}
                   style={styles.text}
                   onChangeText={(val) => this.setState({ company: val })}
