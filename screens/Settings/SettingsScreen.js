@@ -1,8 +1,10 @@
 import React,{useLayoutEffect} from 'react';
 import { StyleSheet } from 'react-native';
-import { Icon,ListItem, Left, Button, Body, Right, List, Content} from 'native-base';
+import { Icon,ListItem, Left, Button, Body, Right, List, Content, Thumbnail} from 'native-base';
 
 import { Text, View } from '../../components/Themed';
+
+import logo from "../../assets/images/makefg2.png"
 
 export default function SettingScreen({ navigation }) {
 
@@ -109,6 +111,22 @@ export default function SettingScreen({ navigation }) {
           </List>
         </View>
       </View>
+      <View style={[styles.screen, {marginTop: 30}]}>
+        <View style={[styles.box2]}>
+          <List style={{width:'100%', backgroundColor:'transparent', padding: 10}}>
+            <ListItem icon style={{margin: 20, backgroundColor:'transparent'}} button={true} >
+              <View style={{width: '75%', backgroundColor:'transparent'}}>
+                <View style={{ backgroundColor:'transparent'}}>
+                  <Text style={{textAlign:'center'}}>Designed, devloped, and built by Colin Franceschini.</Text>
+                </View>
+                <View style={{alignItems:'center', marginTop: 10, backgroundColor:'transparent'}}>
+                  <Thumbnail small square source={logo}/>
+                </View>
+              </View>
+            </ListItem>
+          </List>
+        </View>
+      </View>
     </View>
   );
 }
@@ -137,6 +155,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#1c1c1e',
+    borderRadius: 10
+  },
+
+  box2: {
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0b0b0e',
     borderRadius: 10
   },
 

@@ -4,7 +4,7 @@
     "slug": "wallpaperqr",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/appstore.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -23,13 +23,25 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/images/appstore.png",
+        "backgroundColor": "#000"
       }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": ""
+    "description": "",
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "wallpaperqr",
+            "project": "wallpaperqr",
+            "authToken": "d4b6d8e537384052b94af384c990dab7f6d1e5bef52a4825ba512cedd9f8dfb7"
+          }
+        }
+      ]
+    }
   }
 }

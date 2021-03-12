@@ -6,11 +6,19 @@ import { Root } from 'native-base'
 import React, { useState, useLayoutEffect } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import * as ScreenOrientation from 'expo-screen-orientation'
+import * as Sentry from 'sentry-expo';
 
 import JsonContext from './context'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import Navigation from './navigation'
+
+Sentry.init({
+  dsn: 'https://882c766cdc2841ba9c1a4a952db5cd21@o549413.ingest.sentry.io/5672182',
+  enableInExpoDevelopment: true,
+  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
+});
+
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -71,8 +79,10 @@ export default function App() {
 
   // console.log(json)
 
-
-  return (
+  // if (!isLoadingComplete) {
+  //   return null;
+  // } else {
+    return (
   <SafeAreaProvider style={{ backgroundColor: '#000' }}>
       <Root style={{ backgroundColor: '#000' }}>
       <JsonContext.Provider
@@ -89,4 +99,5 @@ export default function App() {
       <StatusBar />
 		</SafeAreaProvider>
   );
+        // }
 }
