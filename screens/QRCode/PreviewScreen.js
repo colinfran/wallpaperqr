@@ -8,6 +8,9 @@ import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
 import contrast from 'contrast';
+import Draggable from 'react-native-draggable';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import ImageZoom from 'react-native-image-pan-zoom';
 
 import { Text, View } from '../../components/Themed';
 import JsonContext from '../../context';
@@ -176,12 +179,15 @@ export default class PreviewScreen extends React.Component {
               styles.qrcodecontainer,
               { flex: 1, backgroundColor, justifyContent: 'flex-end', bottom: 150 },
             ]}>
-            <QRCode
-              value={json.json?.qrcode}
-              size={width - width * 0.25}
-              color={qrCodeColor}
-              backgroundColor={backgroundColor}
-            />
+              <Draggable maxX={50} minX={50} x={50} y={Dimensions.get('window').height*.5+80}>
+             
+                  <QRCode
+                    value={json.json?.qrcode}
+                    size={width - width * 0.25}
+                    color={qrCodeColor}
+                    backgroundColor={backgroundColor}
+                  />
+            </Draggable>
           </View>
         </ViewShot>
       </View>
