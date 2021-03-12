@@ -96,7 +96,6 @@ export default function App() {
   <Navigation colorScheme={colorScheme} />
 				</JsonContext.Provider>
 			</Root>
-      <StatusBar />
 		</SafeAreaProvider>
   );
         // }

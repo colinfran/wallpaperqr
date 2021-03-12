@@ -5,7 +5,7 @@ import React, {
  useContext, useLayoutEffect, useEffect, useRef,useState 
 } from 'react';
 import {
- StyleSheet, TouchableOpacity, Alert, Dimensions, Animated 
+ StyleSheet, TouchableOpacity, Alert, Dimensions, Animated , StatusBar
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
@@ -186,6 +186,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.flex}>
+      <StatusBar   barStyle="light-content"/>
       <View style={[styles.container]}>
         <View style={styles.list}>
           <View>
