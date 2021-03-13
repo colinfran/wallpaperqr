@@ -185,6 +185,7 @@ export default class PreviewScreen extends React.Component {
     const contrast = fontColorContrast(backgroundColor);
     const infoBarColor = contrast === '#000000' ? '#7b7b7a' : '#1c1c1e'
 
+    const qrcodesize = width - width * .3
     return (
       <View style={[styles.container, {backgroundColor }]}>
         <StatusBar barStyle={contrast === '#000000' ? 'dark-content' : 'light-content'} />
@@ -193,25 +194,33 @@ export default class PreviewScreen extends React.Component {
           </FadeInOut>
         <ViewShot
           ref="viewShot"
-          style={{ flex: 1, backgroundColor }}
+          style={{ flex: 1, backgroundColor}}
           onCapture={(uri) => this.setState({ imageBase64: uri })}
           captureMode="mount"
           options={{ result: 'data-uri' }}
 
         >
           <View
-            style={[
-              styles.qrcodecontainer,
-              { flex: 1, backgroundColor, justifyContent: 'flex-end', bottom: 150 },
-            ]}>
-              <Draggable touchableOpacityProps={{activeOpacity:1}} maxX={50} minX={50} x={50} y={Dimensions.get('window').height*.5+80}>
-             
-                  <QRCode
-                    value={json.json?.qrcode}
-                    size={width - width * 0.25}
-                    color={qrCodeColor}
-                    backgroundColor={backgroundColor}
-                  />
+            style={
+              // {...styles.qrcodecontainer},
+              { backgroundColor, flex: 1, justifyContent:'center', alignItems:'center'}
+            }>
+              <Draggable 
+                style={{}} 
+                touchableOpacityProps={{activeOpacity:1}} 
+                maxX={Dimensions.get('window').width / 2 - (qrcodesize/2)} 
+                minX={Dimensions.get('window').width / 2 - (qrcodesize/2)} 
+                x={Dimensions.get('window').width / 2 - (qrcodesize/2)} 
+                y={Dimensions.get('window').height / 2 - (qrcodesize/2)+80}
+              >
+              <View style={{}}>
+                <QRCode
+                        value={json.json?.qrcode}
+                        size={qrcodesize}
+                        color={qrCodeColor}
+                        backgroundColor={backgroundColor}
+                      />
+              </View>
             </Draggable>
           </View>
         </ViewShot>

@@ -36,6 +36,13 @@ export default class StyleScreen extends React.Component {
     const bright =  json.json?.style?.qrCodeColor ? json.json.style.qrCodeColor : randomColor({luminosity: 'bright'})
     const dark =  json.json?.style?.backgroundColor ? json.json.style.backgroundColor : randomColor({luminosity: 'dark'})
  
+    // website colors
+    // const bright = "#208be2"
+    // const dark = "#ffffff"
+
+    //app store screenshot colors
+    // const bright = "#208be2"
+    // const dark = "#6ec9f6"
     const colorBright = tinycolor(bright);    
     const colorDark = tinycolor(dark);    
     const colorBrightArray = colorBright.toHsv()

@@ -65,9 +65,12 @@ export default function App() {
           },
           qrcode: '',
         };
+        setJson(JSON.parse(value));
         await AsyncStorage.setItem('json', JSON.stringify(value));
       }
-      setJson(JSON.parse(value));
+      else{
+        setJson(JSON.parse(value));
+      }
     };
     lockOrientation();
 
