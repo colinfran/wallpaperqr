@@ -109,7 +109,7 @@ export default class StyleScreen extends React.Component {
       // title
       'Are you sure?',
       // body
-      'If you go back, you won\'t be able to continue building a QR wallpaper.',
+      'If you go back, you will lose any of your styling settings and will have to start this section over.',
       [
         {
           text: 'Yes',
@@ -151,7 +151,7 @@ export default class StyleScreen extends React.Component {
   }
 
   onSatValPickerChange = ({ saturation, value }) => {
-    console.log(value)
+    // console.log(value)
     const {hue} = this.state
     this.setState({
       sat: saturation,
@@ -171,7 +171,7 @@ export default class StyleScreen extends React.Component {
   }
 
   onSatValPickerChange2 = ({ saturation, value }) => {
-    console.log(value)
+    // console.log(value)
     const {hue2} = this.state
     this.setState({
       sat2: saturation,

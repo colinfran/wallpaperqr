@@ -105,14 +105,13 @@ export default class InputScreen extends React.Component {
       parent.setOptions({
         tabBarVisible: true,
       });
-      navigation.navigate('HomeScreen', { component: { name: 'InputScreen', options: { bottomTabs: { visible: false, animate: true } } }, })
-      // navigation.navigate('HomeScreen');
+      navigation.navigate('HomeScreen')
     };
     Alert.alert(
       // title
       'Are you sure?',
       // body
-      "If you go back, you won't be able to continue building a QR wallpaper.",
+      "If you go back, you will lose any previously saved data and will have to start all over.",
       [
         {
           text: 'Yes',
