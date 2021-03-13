@@ -3,8 +3,10 @@ import { StyleSheet } from 'react-native';
 import { Icon,ListItem, Left, Button, Body, Right, List, Content, Thumbnail} from 'native-base';
 
 import { Text, View } from '../../components/Themed';
+import Constants from 'expo-constants';
 
 import logo from "../../assets/images/makefg2.png"
+const version = Constants.manifest.version
 
 export default function SettingScreen({ navigation }) {
 
@@ -113,14 +115,18 @@ export default function SettingScreen({ navigation }) {
       </View>
       <View style={[styles.screen, {marginTop: 30}]}>
         <View style={[styles.box2]}>
-          <List style={{width:'100%', backgroundColor:'transparent', padding: 10}}>
+          <List style={{width:'100%', backgroundColor:'transparent'}}>
             <ListItem icon style={{margin: 20, backgroundColor:'transparent'}} button={true} >
-              <View style={{width: '75%', backgroundColor:'transparent'}}>
+              <View style={{margin: 10, width: '75%', backgroundColor:'transparent'}}>
                 <View style={{ backgroundColor:'transparent'}}>
-                  <Text style={{textAlign:'center'}}>Designed, devloped, and built by Colin Franceschini.</Text>
+                <Text style={{textAlign:'center'}}>Designed, devloped, and built</Text>
+                <Text style={{textAlign:'center'}}>by Colin Franceschini.</Text>
                 </View>
                 <View style={{alignItems:'center', marginTop: 10, backgroundColor:'transparent'}}>
                   <Thumbnail small square source={logo}/>
+                </View>
+                <View style={{backgroundColor:'transparent', marginTop: 10, justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{fontSize:12, color:'grey'}}>{`v${version}`}</Text>
                 </View>
               </View>
             </ListItem>
@@ -163,7 +169,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0b0b0e',
-    borderRadius: 10
+    borderRadius: 10,
+    padding: 15
   },
 
   boxButton: {
