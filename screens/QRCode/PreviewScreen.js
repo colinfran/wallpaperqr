@@ -16,6 +16,8 @@ import FadeInOut from 'react-native-fade-in-out';
 import { Text, View } from '../../components/Themed';
 import JsonContext from '../../context';
 
+let timeout; 
+
 export default class PreviewScreen extends React.Component {
   static contextType = JsonContext;
 
@@ -26,13 +28,18 @@ export default class PreviewScreen extends React.Component {
     }
   }
 
+
+  componentWillUnmount(){
+    clearTimeout(timeout);
+  }
+
   componentDidMount() {
     const json = this.context;
     const { navigation } = this.props;
     const { visible } = this.state;
     this.setState({visible: true})
     const that = this
-    setTimeout(function(){ 
+    timeout = setTimeout(function(){ 
       that.setState({visible: false})
     }, 3000);
 
@@ -137,17 +144,15 @@ export default class PreviewScreen extends React.Component {
   
       await MediaLibrary.saveToLibraryAsync(filename)
         .then(() => {
-          setTimeout(function(){ 
-            Alert.alert(
-              'Wallpaper created successfully',
-              `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
-              [
-                { text: 'Help', onPress: () => navigation.navigate("PermissionsScreen")  },
-                { text: 'OK', onPress: () => console.log('OK Pressed') }
-              ],
-              { cancelable: false }
-            );
-           }, 300);
+          Alert.alert(
+            'Wallpaper created successfully',
+            `Image has been added to your Photo Library. Please remember to set the image as your lock screen wallpaper.`,
+            [
+              { text: 'Help', onPress: () => navigation.navigate("PermissionsScreen")  },
+              { text: 'OK', onPress: () => {} }
+            ],
+            { cancelable: false }
+          );
         })
         .catch((e) => {
           console.error('An error occured while trying to add the image file to the media library');
