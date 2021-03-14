@@ -38,6 +38,7 @@
     "expo-screen-orientation": "~2.1.0",
     "expo-splash-screen": "~0.8.1",
     "expo-status-bar": "~1.0.3",
+    "expo-store-review": "~2.3.0",
     "font-color-contrast": "^1.0.3",
     "native-base": "^2.15.2",
     "prettier": "^2.2.1",

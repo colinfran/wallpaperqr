@@ -1,5 +1,5 @@
 import React,{useLayoutEffect} from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Linking } from 'react-native';
 import { Icon,ListItem, Left, Button, Body, Right, List, Content, Thumbnail} from 'native-base';
 
 import { Text, View } from '../../components/Themed';
@@ -7,6 +7,7 @@ import Constants from 'expo-constants';
 
 import logo from "../../assets/images/makefg2.png"
 const version = Constants.manifest.version
+import * as StoreReview from 'expo-store-review';
 
 export default function SettingScreen({ navigation }) {
 
@@ -24,6 +25,16 @@ export default function SettingScreen({ navigation }) {
       },
     });
   }, [navigation]);
+
+  const goToRating = () => {
+    if (!StoreReview.isAvailableAsync()){
+      //go to rating page
+      Linking.openURL(`https://apps.apple.com/us/app/wallpaperqr/id1558057109?action=write-review`);
+    }else{
+      //use native rating modal
+      StoreReview.requestReview();
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -71,7 +82,7 @@ export default function SettingScreen({ navigation }) {
         </View>
         <View style={[styles.box]}>
           <List style={{width:'100%'}}>
-            <ListItem onPress={()=>navigation.navigate('RateScreen')} underlayColor="#2B2B2E" touchableHighlightStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}} icon style={{}} button={true} >
+            <ListItem onPress={()=>goToRating()} underlayColor="#2B2B2E" touchableHighlightStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}} icon style={{}} button={true} >
               <Left>
                 <Button style={{ backgroundColor: "#8fd158" }}>
                   <Icon type="MaterialCommunityIcons" name="star-circle-outline" />

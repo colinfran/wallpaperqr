@@ -111,7 +111,7 @@ export default class PreviewScreen extends React.Component {
         'Go to setting and turn on permissions for photos',
         [
           { text: 'Cancel', onPress: () => {} },
-          { text: 'Settings', onPress: () => Linking.openURL('app-settings:') },
+          { text: 'Settings', onPress: () => Linking.openSettings() },
         ],
         { cancelable: false },
       );

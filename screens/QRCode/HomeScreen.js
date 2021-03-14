@@ -145,9 +145,9 @@ function HomeScreen({ navigation }) {
   const handleDownloadPress = () => {
     let returnVal = false;
     if (
-      json.json.info.firstName === '' &&
-      json.json.info.lastName === '' &&
-      json.json.info.cellPhone === ''
+      json.json?.info?.firstName === '' &&
+      json.json?.info?.lastName === '' &&
+      json.json?.info?.cellPhone === ''
     ) {
       box1Animate();
       returnVal = true;
@@ -174,9 +174,9 @@ function HomeScreen({ navigation }) {
 
   const onStylePress = () => {
     if (
-      json.json.info.firstName === '' &&
-      json.json.info.lastName === '' &&
-      json.json.info.cellPhone === ''
+      json.json?.info?.firstName === '' &&
+      json.json?.info?.lastName === '' &&
+      json.json?.info?.cellPhone === ''
     ) {
       box1Animate();
     } else {
@@ -201,7 +201,7 @@ function HomeScreen({ navigation }) {
                 style={[box1BorderStyle, styles.boxParent, { transform: [{ rotate: rotate1 }], height: (Dimensions.get('window').height * .25) }]}>
                 <TouchableOpacity
                   // onPress={() => navigation.navigate('InputScreen')}
-                  onPress={()=>navigation.navigate('InputScreen', { component: { name: 'InputScreen', options: { bottomTabs: { visible: false, drawBehind: true, animate: true } } }, })}
+                  onPress={()=>navigation.navigate('InputScreen')}
                   style={[styles.box]}>
                   <View
                     style={{
