@@ -1,7 +1,7 @@
 import fontColorContrast from 'font-color-contrast';
 import { Icon, Toast } from 'native-base';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Dimensions, StatusBar, Alert, Animated } from 'react-native';
+import { StyleSheet, TouchableOpacity, Dimensions, StatusBar, Alert, Animated, Linking } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import ViewShot from 'react-native-view-shot';
 import * as FileSystem from 'expo-file-system';
@@ -107,7 +107,7 @@ export default class PreviewScreen extends React.Component {
     }
     if (existingStatus !== 'granted') {
       Alert.alert(
-        'No Notification Permission',
+        'Please set photo permissions',
         'Go to setting and turn on permissions for photos',
         [
           { text: 'Cancel', onPress: () => {} },
