@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Icon, } from "native-base";
 import { Text, View } from '../../components/Themed';
 
-import { StyleSheet, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import { StyleSheet, TouchableOpacity, Alert, Dimensions, } from 'react-native';
 
 import Carousel from '../../components/LoopedCarousel';
 
 import Image from 'react-native-scalable-image';
 import { HeaderHeightContext } from '@react-navigation/stack';
 
+import IntroGif from "../../assets/images/mock.gif"
 
 import Image1 from "../../assets/images/1.png"
 import Image2 from "../../assets/images/2.png"
@@ -77,6 +78,14 @@ export default class AccordionExample extends Component {
           }}
           isLooped={false}
           pageInfoBackgroundColor="#fff">
+          <View style={styles.slide1}>
+            <Image width={Dimensions.get('window').width*.6} source={IntroGif}/>
+            <View style={{backgroundColor:'transparent', justifyContent:'center', alignItems:'center', marginBottom:100}}>
+              <View style={{backgroundColor:'transparent', width: '80%', }}>
+              <Text style={{textAlign:'center'}}>Create a wallpaper with a scannable QR code</Text>
+              </View>
+            </View>
+          </View>
           <View style={styles.slide1}>
             <Image width={Dimensions.get('window').width*.6} source={dataArray[0]}/>
             <View style={{backgroundColor:'transparent', justifyContent:'center', alignItems:'center', marginBottom:100}}>
