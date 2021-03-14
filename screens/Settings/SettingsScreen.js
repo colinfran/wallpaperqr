@@ -27,13 +27,18 @@ export default function SettingScreen({ navigation }) {
   }, [navigation]);
 
   const goToRating = () => {
-    if (!StoreReview.isAvailableAsync()){
-      //go to rating page
-      Linking.openURL(`https://apps.apple.com/us/app/wallpaperqr/id1558057109?action=write-review`);
-    }else{
-      //use native rating modal
-      StoreReview.requestReview();
-    }
+    // if (!StoreReview.isAvailableAsync()){
+    //   //go to rating page
+    //   Linking.openURL(`https://apps.apple.com/us/app/wallpaperqr/id1558057109?action=write-review`);
+    // }else{
+    //   //use native rating modal
+    //   StoreReview.requestReview();
+    // }
+
+    // stops working after user clicks on button 3 times - i think its an apple limitation
+    // best just to link straight to the app
+    Linking.openURL(`https://apps.apple.com/us/app/wallpaperqr/id1558057109?action=write-review`);
+
   }
 
   return (

@@ -20,7 +20,8 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.wallpaperqr"
+      "bundleIdentifier": "com.wallpaperqr",
+      "appStoreUrl": "https://apps.apple.com/us/app/wallpaperqr/id1558057109"
     },
     "android": {
       "adaptiveIcon": {
