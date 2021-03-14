@@ -1,7 +1,7 @@
 import fontColorContrast from 'font-color-contrast';
 import { Icon, Toast } from 'native-base';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Dimensions, StatusBar, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Dimensions, StatusBar, Alert, Animated } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import ViewShot from 'react-native-view-shot';
 import * as FileSystem from 'expo-file-system';
@@ -12,6 +12,7 @@ import Draggable from 'react-native-draggable';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import ImageZoom from 'react-native-image-pan-zoom';
 import FadeInOut from 'react-native-fade-in-out';
+import { PinchGestureHandler } from 'react-native-gesture-handler';
 
 import { Text, View } from '../../components/Themed';
 import JsonContext from '../../context';
@@ -20,6 +21,9 @@ let timeout;
 
 export default class PreviewScreen extends React.Component {
   static contextType = JsonContext;
+  currentScale = new Animated.Value(1);
+  accumulatedScale = new Animated.Value(1);
+  _lastScale = 1;
 
   constructor(props){
     super(props);
@@ -189,13 +193,16 @@ export default class PreviewScreen extends React.Component {
     const {visible} = this.state
     const contrast = fontColorContrast(backgroundColor);
     const infoBarColor = contrast === '#000000' ? '#7b7b7a' : '#1c1c1e'
+    
+    let scale = Animated.multiply(this.currentScale, this.accumulatedScale);
 
     const qrcodesize = width - width * .3
     return (
       <View style={[styles.container, {backgroundColor }]}>
         <StatusBar barStyle={contrast === '#000000' ? 'dark-content' : 'light-content'} />
         <FadeInOut visible={visible} style={{backgroundColor:infoBarColor, padding: 10, borderRadius: 10,position:'absolute', top: Dimensions.get('window').height*.2, zIndex: 5, justifyContent: 'center', alignSelf: 'center'}}>
-            <Text style={{color:contrast}}>Drag QR Code to adjust vertical positioning</Text>
+        <Text style={{textAlign:'center',color:contrast}}>Drag QR Code to adjust vertical positioning.</Text>
+        <Text style={{textAlign:'center',color:contrast}}>Pinch to adjust size.</Text>
           </FadeInOut>
         <ViewShot
           ref="viewShot"
@@ -218,14 +225,29 @@ export default class PreviewScreen extends React.Component {
                 x={Dimensions.get('window').width / 2 - (qrcodesize/2)} 
                 y={Dimensions.get('window').height / 2 - (qrcodesize/2)+80}
               >
-              <View style={{}}>
-                <QRCode
+              <PinchGestureHandler
+          onGestureEvent={Animated.event(
+            [{ nativeEvent: { scale: this.currentScale } }],
+            { useNativeDriver: true }
+          )}
+          onHandlerStateChange={this._handlePanGestureStateChange}>
+          <Animated.View
+            style={[
+              styles.box,
+              {
+                transform: [{ scale }],
+              },
+            ]}
+          >
+                  <QRCode
                         value={json.json?.qrcode}
                         size={qrcodesize}
                         color={qrCodeColor}
                         backgroundColor={backgroundColor}
                       />
-              </View>
+
+          </Animated.View>
+        </PinchGestureHandler>
             </Draggable>
           </View>
         </ViewShot>
