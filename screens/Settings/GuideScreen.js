@@ -9,7 +9,7 @@ import Carousel from '../../components/LoopedCarousel';
 import Image from 'react-native-scalable-image';
 import { HeaderHeightContext } from '@react-navigation/stack';
 
-import IntroGif from "../../assets/images/mock.gif"
+import IntroGif from "../../assets/images/blankmock.gif"
 
 import Image1 from "../../assets/images/1.png"
 import Image2 from "../../assets/images/2.png"
