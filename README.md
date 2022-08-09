@@ -9,4 +9,4 @@ https://colinfran.github.io/wallpaperqr/
 ## Donations:
 BTC: bc1q7e2rtx7ktrl27wt97avk42994v8ve8ctjk6kzm
 
-<img alt="BTC Address" src="client/public/btc.png" width="200">
+<img alt="BTC Address" src="https://raw.githubusercontent.com/colinfran/nh-dashboard/main/client/public/btc.png" width="200">
